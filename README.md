@@ -17,7 +17,13 @@ Global forest-loss data is usually summarized as a single "total loss" number pe
 ## Data
 
 - **Source:** [Global Forest Data 2001–2022 (Kaggle)](https://www.kaggle.com) — 20,000+ rows across countries, states, provinces, and territories; year-2000 forest extent baseline; 22 annual tree-cover-loss variables.
-- **Files used:** country-level and subnational tree-cover-loss files, plus matching country- and subnational-level carbon files (gross emissions, gross removals, net flux).
+- **Files used:** country-level and subnational tree-cover-loss files, plus matching country- and subnational-level carbon files (gross emissions, gross removals, net flux). All four are in [`Deforestation Data/`](<Deforestation Data>):
+  - `Country tree cover loss.csv` — 1,888 rows
+  - `Subnational 1 tree cover loss.csv` — 28,000 rows
+  - `Country carbon data.csv` — 1,888 rows
+  - `Subnational 1 carbon data.csv` — 28,000 rows
+
+  (Each region appears once per canopy-density threshold; the analysis uses threshold 30. The two subnational files were originally missing from this repo — only 2-byte empty placeholders — because the notebook was built for Google Colab and had them uploaded by hand each session. They've since been restored and checked against the original run: filtering to threshold 30 with the notebook's own logic reproduces its saved row counts exactly, 3,460 rows before the 1,000-ha minimum-extent filter and 3,029 after.)
 - **Final clustering dataset:** 3,029 region-level observations after cleaning.
 - **Final emissions modeling dataset:** 236-country table (deforestation + carbon merged, threshold-30, no missing values).
 
@@ -68,13 +74,21 @@ Top predictors (Random Forest feature importance): cumulative forest loss (ha), 
 - Representation matters for modeling: **relative** loss was right for clustering (fair comparison across region sizes), but **absolute** loss was right for predicting emissions (emissions are measured in absolute terms).
 - Results are explanatory, not causal — this is a strong signal-finding exercise, not a policy-ready causal model.
 
+## How to run
+
+The notebook was built for Google Colab and asks you to upload its input files by hand rather than reading them from a path:
+
+1. Open [`Jupyter Notebook/Deforestation and Carbon Emissions.ipynb`](<Jupyter Notebook/Deforestation and Carbon Emissions.ipynb>) in Google Colab.
+2. At the first upload prompt (top of the notebook), select the two tree-cover-loss files from `Deforestation Data/`: `Country tree cover loss.csv` and `Subnational 1 tree cover loss.csv`.
+3. Run the cells in order. At the second upload prompt (the carbon-emissions section), select the two carbon files: `Country carbon data.csv` and `Subnational 1 carbon data.csv`.
+
 ## Repo structure
 ```
-├── data/                      # raw + cleaned CSVs (or links if too large for GitHub)
-├── notebooks/
-│   └── deforestation_carbon_analysis.ipynb
-├── report/
-│   └── deforestation_carbon_emissions_report.pdf
+├── Deforestation Data/        # the four input CSVs (country + subnational, tree cover loss + carbon)
+├── Jupyter Notebook/
+│   └── Deforestation and Carbon Emissions.ipynb
+├── Report/
+│   └── Team 5 Deforestation and Carbon Emissions.pdf
 └── README.md
 ```
 
