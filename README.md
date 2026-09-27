@@ -17,7 +17,7 @@ Global forest-loss data is usually summarized as a single "total loss" number pe
   - `Subnational 1 tree cover loss.csv` (28,000 rows)
   - `Country carbon data.csv` (1,888 rows): gross emissions, gross removals, net flux
   - `Subnational 1 carbon data.csv` (28,000 rows)
-- Each region appears once per canopy-density threshold; the analysis uses threshold 30.
+- Each region appears once per canopy-density threshold, and the analysis uses threshold 30.
 - **Clustering dataset:** 3,029 region-level observations after cleaning.
 - **Emissions modeling dataset:** 236-country table (deforestation + carbon merged at threshold 30, no missing values).
 
